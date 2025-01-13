@@ -26,11 +26,13 @@ class InitialPage extends StatelessWidget {
               child: Image(
                   image: Image.asset('assets/face.png').image,
                   fit: BoxFit.cover)),*/
-          Positioned(
-            right: size.width * 0.2,
-            bottom: size.height * 0.1,
-            child: CustomImages(),
-          ),
+          size.width < 1400
+              ? SizedBox()
+              : Positioned(
+                  right: size.width * 0.2,
+                  bottom: size.height * 0.1,
+                  child: CustomImages(),
+                ),
           Positioned(
             left: size.width * 0.15,
             top: (size.height - 100) / 2 - 100,
@@ -174,7 +176,7 @@ class _CustomImagesState extends State<CustomImages> {
 class CustomImages extends StatelessWidget {
   List<String> images = [
     "assets/a.png",
-    "assets/b.jpeg",
+    "assets/b.png",
     "assets/c.png",
     "assets/d.png",
     "assets/e.png",
@@ -183,12 +185,12 @@ class CustomImages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 300,
+      width: 350,
       height: 650,
       decoration: BoxDecoration(
-        color: Colors.grey,
+        color: Colors.transparent,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.grey, width: 3),
+
       ),
       child: Builder(
         builder: (context) {
@@ -202,15 +204,17 @@ class CustomImages extends StatelessWidget {
             ),
             items: images
                 .map((item) => ClipRRect(
-              borderRadius: BorderRadius.circular(20), // Rounded corners
-              child: Center(
-                  child: Image.network(
-                    item,
-                    fit: BoxFit.cover, // Changed from BoxFit.fill to BoxFit.cover
-                    height: height,
-                    width: 300, // Set a fixed width to match the container
-                  )),
-            ))
+                      borderRadius:
+                          BorderRadius.circular(20), // Rounded corners
+                      child: Center(
+                          child: Image.network(
+                        item,
+                        fit: BoxFit.contain,
+                        // Changed from BoxFit.fill to BoxFit.cover
+                        height: height,
+                        width: 300, // Set a fixed width to match the container
+                      )),
+                    ))
                 .toList(),
           );
         },
@@ -218,4 +222,3 @@ class CustomImages extends StatelessWidget {
     );
   }
 }
-

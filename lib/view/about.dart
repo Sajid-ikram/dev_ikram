@@ -13,8 +13,6 @@ class About extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
-      height: size.height * 0.4,
-      width: size.width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,

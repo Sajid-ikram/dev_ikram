@@ -2,6 +2,7 @@ import 'package:dev_icons/dev_icons.dart';
 import 'package:dev_ikram/utils/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class SkillsGrid extends StatelessWidget {
   final List<Map<String, dynamic>> skills = [
@@ -21,17 +22,35 @@ class SkillsGrid extends StatelessWidget {
       'icon': DevIcons.expressOriginal
     },
     {'name': 'C', 'color': Color(0xff5A69B9), 'icon': DevIcons.cPlain},
-    {'name': 'C++', 'color': Color(0xff0984CF), 'icon': DevIcons.cplusplusPlain},
+    {
+      'name': 'C++',
+      'color': Color(0xff0984CF),
+      'icon': DevIcons.cplusplusPlain
+    },
     {'name': 'MongoDB', 'color': Colors.green, 'icon': DevIcons.mongodbPlain},
   ];
 
   SkillsGrid({super.key});
 
+  int getCrossAxisCount(double width) {
+    if (width < 700) return 2; // Use 2 columns for very small screens
+    if (width < 1100) return 3; // Use 3 columns for small to medium screens
+    if (width < 1400) return 4; // Use 4 columns for medium to large screens
+    return 5; // Use 5 columns for larger screens
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    print(size.width);
+    int crossAxisCount = getCrossAxisCount(size.width);
+    int rowCount = (skills.length / crossAxisCount).ceil();
+    var boxHeight =
+        ((size.width - ((size.width * 0.045) / 2)) / crossAxisCount) -
+            (size.width * 0.02 * crossAxisCount - 1);
+    print(rowCount);
+    print(crossAxisCount);
     return SizedBox(
-      height: size.height,
       width: size.width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -45,26 +64,47 @@ class SkillsGrid extends StatelessWidget {
             ),
           ),
           SizedBox(height: size.height * 0.05),
-          Expanded(
+          SizedBox(
+            height: boxHeight * (rowCount + 1) +
+                (crossAxisCount == 2
+                    ? -size.width * 0.4
+                    : crossAxisCount == 3
+                        ? -size.width * 0.1
+                        : (size.width * 0.02 * (crossAxisCount - 1))),
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
-              child: GridView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: skills.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 5,
-                  mainAxisSpacing: size.width * 0.02,
-                  crossAxisSpacing: size.width * 0.02,
-                  childAspectRatio: 1,
+              padding: EdgeInsets.symmetric(horizontal: size.width * 0.035),
+              child: ScrollConfiguration(
+                behavior:
+                    ScrollConfiguration.of(context).copyWith(scrollbars: false),
+                child: GridView.builder(
+                  padding: EdgeInsets.all(20),
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: crossAxisCount == 3 || crossAxisCount == 4 ? skills.length + 1 : skills.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: getCrossAxisCount(size.width),
+                    mainAxisSpacing: size.width * 0.02,
+                    crossAxisSpacing: size.width * 0.02,
+                    childAspectRatio: 1,
+                  ),
+                  itemBuilder: (context, index) {
+                    var skill = null;
+                    if( index == 10 && crossAxisCount == 3){
+                      skill =  skills[index - 1];
+                    }else if((index == 10 || index == 9) && crossAxisCount == 4){
+                      skill =  skills[index - 1];
+                    }else{
+                      skill = skills[index];
+                    }
+
+                    return (index == 9 && crossAxisCount == 3) || (index == 8 && crossAxisCount == 4)
+                        ? SizedBox()
+                        : SkillItem(
+                            name: skill['name'],
+                            color: skill['color'],
+                            icon: skill['icon'],
+                          );
+                  },
                 ),
-                itemBuilder: (context, index) {
-                  final skill = skills[index];
-                  return SkillItem(
-                    name: skill['name'],
-                    color: skill['color'],
-                    icon: skill['icon'],
-                  );
-                },
               ),
             ),
           ),
@@ -104,11 +144,9 @@ class _SkillItemState extends State<SkillItem> {
       onExit: (_) => setState(() => _isHovered = false),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-
         transform: transformScale,
         decoration: BoxDecoration(
-
-          color: _isHovered ? primaryColor : Color(0xff3D3E42) ,
+          color: _isHovered ? primaryColor : Color(0xff3D3E42),
           borderRadius: BorderRadius.circular(8),
           boxShadow: _isHovered
               ? [
