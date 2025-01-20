@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-const primaryColor = Color(0xff34353A);
+const primaryColor = Color(0xff31333B);
 const secondaryColor = Color(0xffFFCB6C);
 
 final Map<int, Color> _yellow700Map = {

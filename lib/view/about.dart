@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:readmore/readmore.dart';
 
 import '../utils/colors.dart';
 import '../utils/constant_text.dart';
@@ -37,13 +38,30 @@ class About extends StatelessWidget {
                 margin: const EdgeInsets.fromLTRB(0, 13, 10, 0),
               ),
               Expanded(
-                child: Text(
+                child: ReadMoreText(
                   about,
+                  trimMode: TrimMode.Line,
+                  trimLines: 4,
                   textAlign: TextAlign.justify,
-                  maxLines: 10,
-                  style: TextStyle(
-                    fontSize: 20,
+                  colorClickableText: primaryColor,
+                  trimCollapsedText: ' Show more',
+                  trimExpandedText: ' Show less',
+                  lessStyle: TextStyle(
+                    fontSize: 18,
+                    color: secondaryColor.withOpacity(0.7),
+                  ),
+                  delimiterStyle: TextStyle(
+                    fontSize: 18,
                     color: Colors.white.withOpacity(0.7),
+                  ),
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.white.withOpacity(0.7),
+                  ),
+                  moreStyle:
+                  TextStyle(
+                    fontSize: 18,
+                    color: secondaryColor.withOpacity(0.7),
                   ),
                 ),
               ),

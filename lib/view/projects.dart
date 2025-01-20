@@ -18,10 +18,10 @@ class Projects extends StatelessWidget {
   Projects({super.key});
 
   int getCrossAxisCount(double width) {
-    if (width < 700) return 2; // Use 2 columns for very small screens
-    if (width < 1100) return 3; // Use 3 columns for small to medium screens
-    if (width < 1400) return 4; // Use 4 columns for medium to large screens
-    return 5; // Use 5 columns for larger screens
+    if (width < 700) return 3; // Use 2 columns for very small screens
+    if (width < 1100) return 4; // Use 3 columns for small to medium screens
+    if (width < 1400) return 5; // Use 4 columns for medium to large screens
+    return 6; // Use 5 columns for larger screens
   }
 
   @override
@@ -29,8 +29,6 @@ class Projects extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     int crossAxisCount = getCrossAxisCount(size.width);
     int rowCount = (projects.length / crossAxisCount).ceil();
-
-    print(rowCount);
 
     return SizedBox(
       width: size.width,
@@ -50,12 +48,12 @@ class Projects extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: size.width * 0.045),
             child: StaggeredGrid.count(
-              crossAxisCount: crossAxisCount, // Number of columns in the grid
+              crossAxisCount: crossAxisCount , // Number of columns in the grid
               mainAxisSpacing: size.width * 0.015,
               crossAxisSpacing: size.width * 0.015,
               children: const [
                 StaggeredGridTile.count(
-                  crossAxisCellCount: 2,
+                  crossAxisCellCount: 3,
                   mainAxisCellCount: 2,
                   child: ProjectItemHover(
                     name: 'WB.png',
@@ -111,7 +109,7 @@ class Projects extends StatelessWidget {
                   ),
                 ),
                 StaggeredGridTile.count(
-                  crossAxisCellCount: 2,
+                  crossAxisCellCount: 3,
                   mainAxisCellCount: 2,
                   child: ProjectItemHover(
                     name: 'WA.png',
@@ -199,7 +197,11 @@ class _ProjectItemHoverState extends State<ProjectItemHover> {
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
-          child: Image.asset(widget.name, fit: BoxFit.contain),
+          child: Padding(
+
+            padding: widget.name == "WA.png" || widget.name == "WB.png" ? const EdgeInsets.symmetric(vertical: 9): const EdgeInsets.all(0.0),
+            child: Image.asset(widget.name, fit: BoxFit.contain),
+          ),
         ),
       ),
     );

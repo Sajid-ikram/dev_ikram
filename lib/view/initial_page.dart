@@ -2,14 +2,58 @@ import 'dart:async';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dev_ikram/utils/colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'custom_buttons.dart';
 
-class InitialPage extends StatelessWidget {
+class InitialPage extends StatefulWidget {
   const InitialPage({super.key});
+
+  @override
+  _InitialPageState createState() => _InitialPageState();
+}
+
+class _InitialPageState extends State<InitialPage> {
+  // State variables for hover effects
+  Map<IconData, Color> hoverColors = {
+    FontAwesomeIcons.linkedin: Colors.white.withOpacity(0.7),
+    FontAwesomeIcons.github: Colors.white.withOpacity(0.7),
+    FontAwesomeIcons.stackOverflow: Colors.white.withOpacity(0.7),
+    FontAwesomeIcons.facebook: Colors.white.withOpacity(0.7),
+  };
+
+  Future<void> _launchUrl(String url) async {
+    final Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  Widget _buildSocialMediaIcon(IconData icon, String url) {
+    return MouseRegion(
+      onEnter: (_) {
+        setState(() {
+          hoverColors[icon] = secondaryColor;
+        });
+      },
+      onExit: (_) {
+        setState(() {
+          hoverColors[icon] = Colors.white.withOpacity(0.7); // Reset color
+        });
+      },
+      child: GestureDetector(
+        onTap: () => _launchUrl(url),
+        child: Icon(
+          icon,
+          color: hoverColors[icon], // Use the current hover color
+          size: 30,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +63,8 @@ class InitialPage extends StatelessWidget {
       width: size.width,
       child: Stack(
         children: [
-          /*Container(
-              width: size.width,
-              padding:
-                  EdgeInsets.fromLTRB(size.width * 0.3, 0, size.width * 0.1, 0),
-              child: Image(
-                  image: Image.asset('assets/face.png').image,
-                  fit: BoxFit.cover)),*/
           size.width < 1400
-              ? SizedBox()
+              ? const SizedBox()
               : Positioned(
                   right: size.width * 0.2,
                   bottom: size.height * 0.1,
@@ -35,7 +72,7 @@ class InitialPage extends StatelessWidget {
                 ),
           Positioned(
             left: size.width * 0.15,
-            top: (size.height - 100) / 2 - 100,
+            top: (size.height - 100) / 2 - 160,
             child: Row(
               children: [
                 Column(
@@ -44,26 +81,26 @@ class InitialPage extends StatelessWidget {
                   children: [
                     Text.rich(
                       TextSpan(
-                        text: "I'M  ", // Base style for the first part
+                        text: "I'M  ",
                         style: TextStyle(
                           fontSize: 30,
                           color: Colors.white.withOpacity(0.7),
                           fontWeight: FontWeight.bold,
                           letterSpacing: 2.0,
                         ),
-                        children: <TextSpan>[
+                        children: const <TextSpan>[
                           TextSpan(
                             text: "Sajid Ikram",
                             style: TextStyle(
                               fontSize: 55,
-                              color: secondaryColor, // Gold color
+                              color: secondaryColor,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(
                       "Software Engineer",
                       style: TextStyle(
@@ -71,14 +108,18 @@ class InitialPage extends StatelessWidget {
                         color: Colors.white.withOpacity(0.7),
                       ),
                     ),
-                    Text(
-                      "Mobile Application Developer & Backend Developer",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white.withOpacity(0.7),
+                    ConstrainedBox(
+                      constraints: BoxConstraints(maxWidth: size.width * 0.7),
+                      child: Text(
+                        "Mobile Application Developer & Backend Developer",
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white.withOpacity(0.7),
+                        ),
+                        softWrap: true,
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     HoverButton(text: "Contact Me"),
                   ],
                 ),
@@ -95,83 +136,30 @@ class InitialPage extends StatelessWidget {
                   width: 3,
                   color: secondaryColor,
                 ),
-                SizedBox(height: 10),
-                Icon(FontAwesomeIcons.linkedin),
-                SizedBox(height: 10),
-                Icon(FontAwesomeIcons.github),
-                SizedBox(height: 10),
-                Icon(FontAwesomeIcons.stackOverflow),
-                SizedBox(height: 10),
-                Icon(FontAwesomeIcons.facebook),
+                const SizedBox(height: 10),
+                _buildSocialMediaIcon(
+                  FontAwesomeIcons.linkedin,
+                  'https://www.linkedin.com/in/sajid-ikram/',
+                ),
+                const SizedBox(height: 10),
+                _buildSocialMediaIcon(
+                  FontAwesomeIcons.github,
+                  'https://github.com/Sajid-ikram',
+                ),
+                const SizedBox(height: 10),
+                _buildSocialMediaIcon(
+                  FontAwesomeIcons.stackOverflow,
+                  'https://stackoverflow.com/users/14620219/sajid-ikram',
+                ),
+
               ],
             ),
-          )
+          ),
         ],
       ),
     );
   }
 }
-
-/*class CustomImages extends StatefulWidget {
-  const CustomImages({super.key});
-
-  @override
-  State<CustomImages> createState() => _CustomImagesState();
-}
-
-class _CustomImagesState extends State<CustomImages> {
-
-
-  int index = 0;
-  late Timer _timer;
-
-  @override
-  void initState() {
-    super.initState();
-    // Start a timer that fires every second
-    _timer = Timer.periodic(Duration(seconds: 3), (timer) {
-      setState(() {
-        // Update the index and reset if it reaches the end of the list
-        index = (index + 1) % images.length;
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    // Cancel the timer when the widget is disposed
-    _timer.cancel();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 300,
-      height: 650,
-      decoration: BoxDecoration(
-        color: Colors.transparent,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: AnimatedSwitcher(
-        duration: Duration(seconds: 3), // Smooth transition duration
-        transitionBuilder: (Widget child, Animation<double> animation) {
-          // Use FadeTransition for a smooth fade effect
-          return FadeTransition(opacity: animation, child: child);
-        },
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Image(
-            // Key is needed to tell AnimatedSwitcher when the widget changes
-            key: ValueKey<String>(images[index]),
-            image: AssetImage(images[index]),
-            fit: BoxFit.fill,
-          ),
-        ),
-      ),
-    );
-  }
-}*/
 
 class CustomImages extends StatelessWidget {
   List<String> images = [
@@ -190,7 +178,6 @@ class CustomImages extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.transparent,
         borderRadius: BorderRadius.circular(20),
-
       ),
       child: Builder(
         builder: (context) {
@@ -204,15 +191,13 @@ class CustomImages extends StatelessWidget {
             ),
             items: images
                 .map((item) => ClipRRect(
-                      borderRadius:
-                          BorderRadius.circular(20), // Rounded corners
+                      borderRadius: BorderRadius.circular(20),
                       child: Center(
                           child: Image.network(
                         item,
                         fit: BoxFit.contain,
-                        // Changed from BoxFit.fill to BoxFit.cover
                         height: height,
-                        width: 300, // Set a fixed width to match the container
+                        width: 300,
                       )),
                     ))
                 .toList(),
