@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import '../utils/constant_text.dart';
+
 class Projects extends StatelessWidget {
   final List<Map<String, dynamic>> projects = [
     {'name': 'a.png', 'color': Colors.blue, 'icon': DevIcons.flutterPlain},
@@ -39,7 +41,7 @@ class Projects extends StatelessWidget {
           Text(
             "Projects",
             style: TextStyle(
-              fontSize: 50,
+              fontSize: size.width < 500  ? 35 : 50,
               color: Colors.white.withOpacity(0.7),
               fontWeight: FontWeight.w900,
             ),
@@ -200,7 +202,7 @@ class _ProjectItemHoverState extends State<ProjectItemHover> {
           child: Padding(
 
             padding: widget.name == "WA.png" || widget.name == "WB.png" ? const EdgeInsets.symmetric(vertical: 9): const EdgeInsets.all(0.0),
-            child: Image.asset(widget.name, fit: BoxFit.contain),
+            child: Image.network("${releasePath}assets/${widget.name}", fit: BoxFit.contain),
           ),
         ),
       ),

@@ -5,6 +5,7 @@ import 'package:dev_ikram/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../utils/constant_text.dart';
 import 'custom_buttons.dart';
 
 class InitialPage extends StatefulWidget {
@@ -83,16 +84,16 @@ class _InitialPageState extends State<InitialPage> {
                       TextSpan(
                         text: "I'M  ",
                         style: TextStyle(
-                          fontSize: 30,
+                          fontSize: size.width < 700  ? 20 : 30,
                           color: Colors.white.withOpacity(0.7),
                           fontWeight: FontWeight.bold,
                           letterSpacing: 2.0,
                         ),
-                        children: const <TextSpan>[
+                        children:  <TextSpan>[
                           TextSpan(
                             text: "Sajid Ikram",
                             style: TextStyle(
-                              fontSize: 55,
+                              fontSize: size.width < 700  ? 40 : 55,
                               color: secondaryColor,
                               fontWeight: FontWeight.bold,
                             ),
@@ -104,7 +105,7 @@ class _InitialPageState extends State<InitialPage> {
                     Text(
                       "Software Engineer",
                       style: TextStyle(
-                        fontSize: 30,
+                        fontSize: size.width < 700  ? 25 : 30,
                         color: Colors.white.withOpacity(0.7),
                       ),
                     ),
@@ -113,13 +114,13 @@ class _InitialPageState extends State<InitialPage> {
                       child: Text(
                         "Mobile Application Developer & Backend Developer",
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize:  size.width < 700  ? 16 :20,
                           color: Colors.white.withOpacity(0.7),
                         ),
                         softWrap: true,
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height:  20),
                     HoverButton(text: "Contact Me"),
                   ],
                 ),
@@ -163,11 +164,11 @@ class _InitialPageState extends State<InitialPage> {
 
 class CustomImages extends StatelessWidget {
   List<String> images = [
-    "assets/a.png",
-    "assets/b.png",
-    "assets/c.png",
-    "assets/d.png",
-    "assets/e.png",
+    "${releasePath}assets/a.png",
+    "${releasePath}assets/b.png",
+    "${releasePath}assets/c.png",
+    "${releasePath}assets/d.png",
+    "${releasePath}assets/e.png",
   ];
 
   @override

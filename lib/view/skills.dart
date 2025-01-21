@@ -58,7 +58,7 @@ class SkillsGrid extends StatelessWidget {
           Text(
             "My Skills",
             style: TextStyle(
-              fontSize: 50,
+              fontSize: size.width < 500  ? 35 : 50,
               color: Colors.white.withOpacity(0.7),
               fontWeight: FontWeight.w900,
             ),

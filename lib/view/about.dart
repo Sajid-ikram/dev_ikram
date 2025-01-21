@@ -22,7 +22,7 @@ class About extends StatelessWidget {
           Text(
             "About",
             style: TextStyle(
-              fontSize: 50,
+              fontSize: size.width < 500  ? 35 : 50,
               color: Colors.white.withOpacity(0.7),
               fontWeight: FontWeight.w900,
             ),
@@ -47,20 +47,20 @@ class About extends StatelessWidget {
                   trimCollapsedText: ' Show more',
                   trimExpandedText: ' Show less',
                   lessStyle: TextStyle(
-                    fontSize: 18,
+                    fontSize: size.width < 500  ? 16 : 18,
                     color: secondaryColor.withOpacity(0.7),
                   ),
                   delimiterStyle: TextStyle(
-                    fontSize: 18,
+                    fontSize: size.width < 500  ? 16 : 18,
                     color: Colors.white.withOpacity(0.7),
                   ),
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: size.width < 500  ? 16 : 18,
                     color: Colors.white.withOpacity(0.7),
                   ),
                   moreStyle:
                   TextStyle(
-                    fontSize: 18,
+                    fontSize: size.width < 500  ? 16 : 18,
                     color: secondaryColor.withOpacity(0.7),
                   ),
                 ),

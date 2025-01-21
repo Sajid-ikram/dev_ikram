@@ -58,13 +58,13 @@ class CustomNevBar extends StatelessWidget {
           SizedBox(width: size.width * 0.05),
           const Icon(FontAwesomeIcons.house),
           Spacer(),
-          GestureDetector(
+          if(size.width > 450) GestureDetector(
             onTap: () => scrollToSection(size.height),
             // Scroll to the top (About section)
             child: HoverText(text: "About"),
           ),
           const SizedBox(width: 40),
-          GestureDetector(
+          if(size.width > 450) GestureDetector(
             onTap: () => scrollToSection(size.height *
                 (size.width < 700
                     ? 3
@@ -77,7 +77,7 @@ class CustomNevBar extends StatelessWidget {
             child: HoverText(text: "Projects"),
           ),
           const SizedBox(width: 40),
-          GestureDetector(
+          if(size.width > 450) GestureDetector(
             onTap: () => scrollToSection(size.height *
                 (size.width < 700
                     ? 4.7

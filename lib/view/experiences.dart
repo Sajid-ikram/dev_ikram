@@ -50,7 +50,7 @@ class Experiences extends StatelessWidget {
           Text(
             "Experience",
             style: TextStyle(
-              fontSize: 50,
+              fontSize: size.width < 500  ? 35 : 50,
               color: Colors.white.withOpacity(0.7),
               fontWeight: FontWeight.w900,
             ),
@@ -58,7 +58,7 @@ class Experiences extends StatelessWidget {
           SizedBox(height: size.height * 0.05),
           Container(
             padding: EdgeInsets.symmetric(horizontal: size.width * 0.045),
-            height: size.height * 0.65,
+            height: size.height * 0.68,
             child: ScrollConfiguration(
               behavior: const ScrollBehavior().copyWith(overscroll: false, scrollbars: false),
               child: SingleChildScrollView(
@@ -125,6 +125,7 @@ class ExperienceItem extends StatefulWidget {
 class _ExperienceItemState extends State<ExperienceItem> {
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Center(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -173,7 +174,7 @@ class _ExperienceItemState extends State<ExperienceItem> {
                 Text(
                   widget.projects["title"],
                   style: TextStyle(
-                    fontSize: 30,
+                    fontSize: size.width < 500  ? 24 : 30,
                     color: Colors.white.withOpacity(0.7),
                     fontWeight: FontWeight.w700,
                   ),
@@ -181,7 +182,7 @@ class _ExperienceItemState extends State<ExperienceItem> {
                 Text(
                   widget.projects["office"],
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: size.width < 500  ? 18 : 20,
                     color: Colors.white.withOpacity(0.7),
                     fontWeight: FontWeight.w500,
                   ),
@@ -206,20 +207,20 @@ class _ExperienceItemState extends State<ExperienceItem> {
                   trimCollapsedText: ' Show more',
                   trimExpandedText: ' Show less',
                   lessStyle: TextStyle(
-                    fontSize: 18,
+                    fontSize: size.width < 500  ? 16 : 18,
                     color: secondaryColor.withOpacity(0.7),
                   ),
                   delimiterStyle: TextStyle(
-                    fontSize: 18,
+                    fontSize: size.width < 500  ? 16 : 18,
                     color: Colors.white.withOpacity(0.7),
                   ),
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: size.width < 500  ? 16 : 18,
                     color: Colors.white.withOpacity(0.7),
                   ),
                   moreStyle:
                   TextStyle(
-                    fontSize: 18,
+                    fontSize: size.width < 500  ? 16 : 18,
                     color: secondaryColor.withOpacity(0.7),
                   ),
                 ),

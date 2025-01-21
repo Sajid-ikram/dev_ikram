@@ -17,6 +17,7 @@ class _HoverButtonState extends State<HoverButton> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Center(
       child: MouseRegion(
         onEnter: (_) => setState(() => isHovering = true),
@@ -25,7 +26,7 @@ class _HoverButtonState extends State<HoverButton> {
           duration: Duration(milliseconds: 200),
           child: Container(
             padding:
-            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            EdgeInsets.symmetric(horizontal: size.width < 700  ? 15 : 20, vertical:  size.width < 700  ? 7 : 10),
             decoration: BoxDecoration(
               color: isHovering ? secondaryColor : Colors.transparent,
               border: Border.all(color: secondaryColor, width: 2),
@@ -35,7 +36,7 @@ class _HoverButtonState extends State<HoverButton> {
               "Contact Me",
               style: TextStyle(
                 color: isHovering ? Colors.white : secondaryColor,
-                fontSize: 16,
+                fontSize: size.width < 700  ? 14 : 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
