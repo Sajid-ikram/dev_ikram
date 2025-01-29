@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../utils/colors.dart';
 import 'about.dart';
+import 'contact_me.dart';
 import 'experiences.dart';
 import 'initial_page.dart';
 
@@ -17,15 +18,17 @@ class Home extends StatelessWidget {
     return Scaffold(
       backgroundColor: primaryColor,
       body: ListView(
+
         controller: _scrollController,
         children: [
           CustomNevBar(scrollController: _scrollController),
-          InitialPage(),
+          InitialPage(scrollController: _scrollController),
           About(),
           SizedBox(height: 50),
           SkillsGrid(),
           Projects(),
           Experiences(),
+          ContactMe(),
         ],
       ),
     );

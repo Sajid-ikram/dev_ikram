@@ -50,7 +50,7 @@ class Experiences extends StatelessWidget {
           Text(
             "Experience",
             style: TextStyle(
-              fontSize: size.width < 500  ? 35 : 50,
+              fontSize: size.width < 500 ? 35 : 50,
               color: Colors.white.withOpacity(0.7),
               fontWeight: FontWeight.w900,
             ),
@@ -58,12 +58,21 @@ class Experiences extends StatelessWidget {
           SizedBox(height: size.height * 0.05),
           Container(
             padding: EdgeInsets.symmetric(horizontal: size.width * 0.045),
-            height: size.height * 0.68,
+            height: crossAxisCount == 5
+                ? size.height * 0.55
+                : crossAxisCount == 4
+                    ? size.height * 0.58
+                    : crossAxisCount == 2 ?size.height * 0.55  : size.height * 0.68,
             child: ScrollConfiguration(
-              behavior: const ScrollBehavior().copyWith(overscroll: false, scrollbars: false),
+
+              behavior: const ScrollBehavior()
+                  .copyWith(overscroll: false, scrollbars: false),
               child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                padding: EdgeInsets.zero,
                 child: Column(
                   children: [
+                    const SizedBox(height: 20),
                     ExperienceItem(
                       projects: projects[0],
                     ),
@@ -76,7 +85,6 @@ class Experiences extends StatelessWidget {
               ),
             ),
           ),
-
 
           /* Padding(
             padding: EdgeInsets.symmetric(horizontal: size.width * 0.045),
@@ -174,7 +182,7 @@ class _ExperienceItemState extends State<ExperienceItem> {
                 Text(
                   widget.projects["title"],
                   style: TextStyle(
-                    fontSize: size.width < 500  ? 24 : 30,
+                    fontSize: size.width < 500 ? 24 : 30,
                     color: Colors.white.withOpacity(0.7),
                     fontWeight: FontWeight.w700,
                   ),
@@ -182,7 +190,7 @@ class _ExperienceItemState extends State<ExperienceItem> {
                 Text(
                   widget.projects["office"],
                   style: TextStyle(
-                    fontSize: size.width < 500  ? 18 : 20,
+                    fontSize: size.width < 500 ? 18 : 20,
                     color: Colors.white.withOpacity(0.7),
                     fontWeight: FontWeight.w500,
                   ),
@@ -207,20 +215,19 @@ class _ExperienceItemState extends State<ExperienceItem> {
                   trimCollapsedText: ' Show more',
                   trimExpandedText: ' Show less',
                   lessStyle: TextStyle(
-                    fontSize: size.width < 500  ? 16 : 18,
+                    fontSize: size.width < 500 ? 16 : 18,
                     color: secondaryColor.withOpacity(0.7),
                   ),
                   delimiterStyle: TextStyle(
-                    fontSize: size.width < 500  ? 16 : 18,
+                    fontSize: size.width < 500 ? 16 : 18,
                     color: Colors.white.withOpacity(0.7),
                   ),
                   style: TextStyle(
-                    fontSize: size.width < 500  ? 16 : 18,
+                    fontSize: size.width < 500 ? 16 : 18,
                     color: Colors.white.withOpacity(0.7),
                   ),
-                  moreStyle:
-                  TextStyle(
-                    fontSize: size.width < 500  ? 16 : 18,
+                  moreStyle: TextStyle(
+                    fontSize: size.width < 500 ? 16 : 18,
                     color: secondaryColor.withOpacity(0.7),
                   ),
                 ),

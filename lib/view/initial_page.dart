@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dev_ikram/utils/colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -9,7 +10,9 @@ import '../utils/constant_text.dart';
 import 'custom_buttons.dart';
 
 class InitialPage extends StatefulWidget {
-  const InitialPage({super.key});
+  final ScrollController scrollController;
+
+  const InitialPage({super.key, required this.scrollController});
 
   @override
   _InitialPageState createState() => _InitialPageState();
@@ -21,7 +24,6 @@ class _InitialPageState extends State<InitialPage> {
     FontAwesomeIcons.linkedin: Colors.white.withOpacity(0.7),
     FontAwesomeIcons.github: Colors.white.withOpacity(0.7),
     FontAwesomeIcons.stackOverflow: Colors.white.withOpacity(0.7),
-    FontAwesomeIcons.facebook: Colors.white.withOpacity(0.7),
   };
 
   Future<void> _launchUrl(String url) async {
@@ -84,16 +86,16 @@ class _InitialPageState extends State<InitialPage> {
                       TextSpan(
                         text: "I'M  ",
                         style: TextStyle(
-                          fontSize: size.width < 700  ? 20 : 30,
+                          fontSize: size.width < 700 ? 20 : 30,
                           color: Colors.white.withOpacity(0.7),
                           fontWeight: FontWeight.bold,
                           letterSpacing: 2.0,
                         ),
-                        children:  <TextSpan>[
+                        children: <TextSpan>[
                           TextSpan(
                             text: "Sajid Ikram",
                             style: TextStyle(
-                              fontSize: size.width < 700  ? 40 : 55,
+                              fontSize: size.width < 700 ? 40 : 55,
                               color: secondaryColor,
                               fontWeight: FontWeight.bold,
                             ),
@@ -105,7 +107,7 @@ class _InitialPageState extends State<InitialPage> {
                     Text(
                       "Software Engineer",
                       style: TextStyle(
-                        fontSize: size.width < 700  ? 25 : 30,
+                        fontSize: size.width < 700 ? 25 : 30,
                         color: Colors.white.withOpacity(0.7),
                       ),
                     ),
@@ -114,14 +116,21 @@ class _InitialPageState extends State<InitialPage> {
                       child: Text(
                         "Mobile Application Developer & Backend Developer",
                         style: TextStyle(
-                          fontSize:  size.width < 700  ? 16 :20,
+                          fontSize: size.width < 700 ? 16 : 20,
                           color: Colors.white.withOpacity(0.7),
                         ),
                         softWrap: true,
                       ),
                     ),
-                    const SizedBox(height:  20),
-                    HoverButton(text: "Contact Me"),
+                    const SizedBox(height: 20),
+                    GestureDetector(
+                      onTap: () => widget.scrollController.animateTo(
+                        size.height * 4,
+                        duration: const Duration(seconds: 1),
+                        curve: Curves.easeInOut,
+                      ),
+                      child: HoverButton(text: "Contact Me"),
+                    ),
                   ],
                 ),
               ],
@@ -152,7 +161,6 @@ class _InitialPageState extends State<InitialPage> {
                   FontAwesomeIcons.stackOverflow,
                   'https://stackoverflow.com/users/14620219/sajid-ikram',
                 ),
-
               ],
             ),
           ),

@@ -44,7 +44,7 @@ class HomeWithPopup extends StatefulWidget {
 }
 
 class _HomeWithPopupState extends State<HomeWithPopup> {
-  bool _showPopup = true; // Controls whether the popup is visible or not
+  bool _showPopup = false; // Controls whether the popup is visible or not
 
   @override
   Widget build(BuildContext context) {

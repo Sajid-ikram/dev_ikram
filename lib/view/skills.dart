@@ -13,12 +13,18 @@ class SkillsGrid extends StatelessWidget {
       'color': Colors.orange,
       'icon': DevIcons.firebasePlain
     },
-    {'name': 'Git', 'color': Colors.white, 'icon': DevIcons.githubOriginal},
+    {'name': 'Git', 'color': Color(0xffE74E30), 'icon': DevIcons.gitPlain},
+    {'name': 'GitHub', 'color': Colors.white, 'icon': DevIcons.githubOriginal},
     {'name': 'Java', 'color': Color(0xff01738E), 'icon': DevIcons.javaPlain},
     {'name': 'Node.js', 'color': Colors.green, 'icon': DevIcons.nodejsPlain},
     {
       'name': 'Express.js',
       'color': Colors.orange,
+      'icon': DevIcons.expressOriginal
+    },
+    {
+      'name': 'JavaScript',
+      'color': Color(0xffF7E025),
       'icon': DevIcons.expressOriginal
     },
     {'name': 'C', 'color': Color(0xff5A69B9), 'icon': DevIcons.cPlain},
@@ -33,10 +39,11 @@ class SkillsGrid extends StatelessWidget {
   SkillsGrid({super.key});
 
   int getCrossAxisCount(double width) {
-    if (width < 700) return 2; // Use 2 columns for very small screens
-    if (width < 1100) return 3; // Use 3 columns for small to medium screens
-    if (width < 1400) return 4; // Use 4 columns for medium to large screens
-    return 5; // Use 5 columns for larger screens
+    if (width < 500) return 2; // Use 2 columns for very small screens
+    if (width < 700) return 3; // Use 2 columns for very small screens
+    if (width < 1100) return 4; // Use 3 columns for small to medium screens
+    if (width < 1400) return 5; // Use 4 columns for medium to large screens
+    return 6; // Use 5 columns for larger screens
   }
 
   @override
@@ -46,8 +53,9 @@ class SkillsGrid extends StatelessWidget {
     int crossAxisCount = getCrossAxisCount(size.width);
     int rowCount = (skills.length / crossAxisCount).ceil();
     var boxHeight =
-        ((size.width - ((size.width * 0.045) / 2)) / crossAxisCount) -
-            (size.width * 0.02 * crossAxisCount - 1);
+        ((size.width - ((size.width * 0.045) / 2)) / ( (crossAxisCount == 6 || crossAxisCount == 5)  ? (crossAxisCount - 1) : crossAxisCount ) ) -
+            (size.width * 0.02 * crossAxisCount - 1); // i don't even know what i did here
+
     print(rowCount);
     print(crossAxisCount);
     return SizedBox(
@@ -58,7 +66,7 @@ class SkillsGrid extends StatelessWidget {
           Text(
             "My Skills",
             style: TextStyle(
-              fontSize: size.width < 500  ? 35 : 50,
+              fontSize: size.width < 500 ? 35 : 50,
               color: Colors.white.withOpacity(0.7),
               fontWeight: FontWeight.w900,
             ),
@@ -77,9 +85,9 @@ class SkillsGrid extends StatelessWidget {
                 behavior:
                     ScrollConfiguration.of(context).copyWith(scrollbars: false),
                 child: GridView.builder(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: crossAxisCount == 3 || crossAxisCount == 4 ? skills.length + 1 : skills.length,
+                  itemCount: skills.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: getCrossAxisCount(size.width),
                     mainAxisSpacing: size.width * 0.02,
@@ -87,22 +95,13 @@ class SkillsGrid extends StatelessWidget {
                     childAspectRatio: 1,
                   ),
                   itemBuilder: (context, index) {
-                    var skill = null;
-                    if( index == 10 && crossAxisCount == 3){
-                      skill =  skills[index - 1];
-                    }else if((index == 10 || index == 9) && crossAxisCount == 4){
-                      skill =  skills[index - 1];
-                    }else{
-                      skill = skills[index];
-                    }
+                    var skill = skills[index];
 
-                    return (index == 9 && crossAxisCount == 3) || (index == 8 && crossAxisCount == 4)
-                        ? SizedBox()
-                        : SkillItem(
-                            name: skill['name'],
-                            color: skill['color'],
-                            icon: skill['icon'],
-                          );
+                    return SkillItem(
+                      name: skill['name'],
+                      color: skill['color'],
+                      icon: skill['icon'],
+                    );
                   },
                 ),
               ),
