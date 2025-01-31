@@ -125,7 +125,7 @@ class _InitialPageState extends State<InitialPage> {
                     const SizedBox(height: 20),
                     GestureDetector(
                       onTap: () => widget.scrollController.animateTo(
-                        size.height * 4,
+                        size.height * 7,
                         duration: const Duration(seconds: 1),
                         curve: Curves.easeInOut,
                       ),

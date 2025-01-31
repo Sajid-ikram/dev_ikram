@@ -58,60 +58,20 @@ class Experiences extends StatelessWidget {
           SizedBox(height: size.height * 0.05),
           Container(
             padding: EdgeInsets.symmetric(horizontal: size.width * 0.045),
-            height: crossAxisCount == 5
-                ? size.height * 0.55
-                : crossAxisCount == 4
-                    ? size.height * 0.58
-                    : crossAxisCount == 2 ?size.height * 0.55  : size.height * 0.68,
-            child: ScrollConfiguration(
-
-              behavior: const ScrollBehavior()
-                  .copyWith(overscroll: false, scrollbars: false),
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                padding: EdgeInsets.zero,
-                child: Column(
-                  children: [
-                    const SizedBox(height: 20),
-                    ExperienceItem(
-                      projects: projects[0],
-                    ),
-                    SizedBox(height: size.height * 0.05),
-                    ExperienceItem(
-                      projects: projects[1],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-
-          /* Padding(
-            padding: EdgeInsets.symmetric(horizontal: size.width * 0.045),
-            child: StaggeredGrid.count(
-              crossAxisCount: crossAxisCount , // Number of columns in the grid
-              mainAxisSpacing: size.width * 0.015,
-              crossAxisSpacing: size.width * 0.015,
-
+            child: Column(
               children: [
-                StaggeredGridTile.count(
-                  crossAxisCellCount: 5,
-                  mainAxisCellCount: 1,
-                  child: ExperienceItem(
-                    projects: projects[0],
-                  ),
+                const SizedBox(height: 20),
+                ExperienceItem(
+                  projects: projects[0],
                 ),
-                StaggeredGridTile.count(
-                  crossAxisCellCount: 5,
-                  mainAxisCellCount: 1,
-                  child: ExperienceItem(
-                    projects: projects[1],
-                  ),
+                SizedBox(height: size.height * 0.05),
+                ExperienceItem(
+                  projects: projects[1],
                 ),
               ],
             ),
-          ),*/
-          SizedBox(height: size.height * 0.05),
+          ),
+          const SizedBox(height: 30)
         ],
       ),
     );
@@ -174,7 +134,7 @@ class _ExperienceItemState extends State<ExperienceItem> {
               ),
             ],
           ),
-          SizedBox(width: 20),
+          const SizedBox(width: 20),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -209,7 +169,10 @@ class _ExperienceItemState extends State<ExperienceItem> {
                 ReadMoreText(
                   widget.projects["description"],
                   trimMode: TrimMode.Line,
-                  trimLines: 4,
+                  trimLines:
+                      size.width < 500 && widget.projects["year"] == "2023"
+                          ? 5
+                          : 4,
                   textAlign: TextAlign.justify,
                   colorClickableText: primaryColor,
                   trimCollapsedText: ' Show more',

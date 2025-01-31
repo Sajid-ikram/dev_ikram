@@ -23,7 +23,7 @@ class Projects extends StatelessWidget {
   int getCrossAxisCount(double width) {
     if (width < 700) return 3; // Use 2 columns for very small screens
     if (width < 1100) return 4; // Use 3 columns for small to medium screens
-    if (width < 1400) return 5; // Use 4 columns for medium to large screens
+    //if (width < 1400) return 5; // Use 4 columns for medium to large screens
     return 6; // Use 5 columns for larger screens
   }
 

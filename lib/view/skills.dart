@@ -42,7 +42,7 @@ class SkillsGrid extends StatelessWidget {
     if (width < 500) return 2; // Use 2 columns for very small screens
     if (width < 700) return 3; // Use 2 columns for very small screens
     if (width < 1100) return 4; // Use 3 columns for small to medium screens
-    if (width < 1400) return 5; // Use 4 columns for medium to large screens
+    //if (width < 1400) return 5; // Use 4 columns for medium to large screens
     return 6; // Use 5 columns for larger screens
   }
 
@@ -52,9 +52,12 @@ class SkillsGrid extends StatelessWidget {
     print(size.width);
     int crossAxisCount = getCrossAxisCount(size.width);
     int rowCount = (skills.length / crossAxisCount).ceil();
-    var boxHeight =
-        ((size.width - ((size.width * 0.045) / 2)) / ( (crossAxisCount == 6 || crossAxisCount == 5)  ? (crossAxisCount - 1) : crossAxisCount ) ) -
-            (size.width * 0.02 * crossAxisCount - 1); // i don't even know what i did here
+    var boxHeight = ((size.width - ((size.width * 0.045) / 2)) /
+            ((crossAxisCount == 6 || crossAxisCount == 5)
+                ? (crossAxisCount - 1)
+                : crossAxisCount)) -
+        (size.width * 0.02 * crossAxisCount -
+            1); // i don't even know what i did here
 
     print(rowCount);
     print(crossAxisCount);
@@ -138,6 +141,7 @@ class _SkillItemState extends State<SkillItem> {
     final Matrix4 transformScale = Matrix4.identity()
       ..scale(_isHovered ? 1.01 : 1.0);
 
+    var size = MediaQuery.of(context).size;
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
@@ -162,7 +166,13 @@ class _SkillItemState extends State<SkillItem> {
             Icon(
               widget.icon,
               color: widget.color,
-              size: _isHovered ? 80 : 70,
+              size: _isHovered
+                  ? size.width < 1400
+                      ? 75
+                      : 80
+                  : size.width < 1400
+                      ? 55
+                      : 70,
             ),
             const SizedBox(height: 20),
             Text(
@@ -170,7 +180,13 @@ class _SkillItemState extends State<SkillItem> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white.withOpacity(_isHovered ? 0.9 : 0.7),
-                fontSize: _isHovered ? 22 : 20,
+                fontSize: _isHovered
+                    ? size.width < 1400
+                        ? 20
+                        : 22
+                    : size.width < 1400
+                        ? 18
+                        : 20,
                 fontWeight: _isHovered ? FontWeight.bold : FontWeight.normal,
               ),
             ),
