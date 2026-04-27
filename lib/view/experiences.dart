@@ -11,18 +11,32 @@ import '../utils/colors.dart';
 class Experiences extends StatelessWidget {
   final List<Map<String, dynamic>> projects = [
     {
-      'title': 'Software Engineer',
-      'year': "2023",
-      'office': "Deepgreen Studio",
+      'title': 'Junior Mobile App Developer',
+      'year': '2025',
+      'office': 'Perinatal Institute, Birmingham, UK',
       'description':
-          "At Deepgreen Studio (January 2023 – August 2023), I excelled in developing and enhancing POS payment systems, integrating real-time updates to optimize functionality. I also implemented a robust POS receipt printing mechanism, reducing errors by 50%. A significant achievement was designing an NFC-based attendance system from scratch, demonstrating my problem-solving skills and technical expertise. Additionally, I mentored a colleague in Flutter development, which resulted in a great improvement in their performance."
+          '(October 2025 - Present) Build and maintain Flutter clinical forms (medical history and screening widgets) with complex validation and conditional visibility. Work with QA on test-fail tickets by reproducing issues, fixing widgets, and updating tests to prevent regressions. Align UI, validation rules, and info texts with clinical documentation using Git/Bitbucket and a PR-based workflow.',
     },
     {
-      'title': 'Software Engineer Intern',
-      'year': "2022",
-      'office': "AlgoMatrix Limited",
+      'title': 'Flutter Developer (Part-Time)',
+      'year': '2025',
+      'office': 'Finz',
       'description':
-          "During my time as a Software Developer Intern at AlgoMatrix Limited (October 2021 – February 2022), I focused on creating innovative mobile applications and integrating backend services. I developed a feature-rich photo editor app, which now boasts over 10,000 active users, enhancing the user experience with cutting-edge editing tools. My role also involved developing an e-commerce app and integrating RESTful APIs, solidifying my proficiency in cross-platform development and backend integration."
+          '(April 2025 - July 2025) Developed a secure fintech app in Flutter integrating Weavr API for account, card, and transaction flows. Contributed to automated testing and CI/CD, and helped prepare builds for the App Store and Google Play.',
+    },
+    {
+      'title': 'Software Engineer',
+      'year': '2022',
+      'office': 'Deepgreen Studio',
+      'description':
+          '(May 2022 - August 2023) Built POS and NFC-based systems with real-time processing and secure attendance tracking. Implemented database-driven features (SQLite/MongoDB) to support offline use and reliable syncing.',
+    },
+    {
+      'title': 'Software Developer Intern',
+      'year': '2021',
+      'office': 'AlgoMatrix Limited',
+      'description':
+          '(October 2021 - February 2022) Developed a Flutter-based photo editor and e-commerce app, including performance-focused Protobuf API integration.',
     },
   ];
 
@@ -61,13 +75,18 @@ class Experiences extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 20),
-                ExperienceItem(
-                  projects: projects[0],
-                ),
-                SizedBox(height: size.height * 0.05),
-                ExperienceItem(
-                  projects: projects[1],
-                ),
+                ...projects.asMap().entries.map((entry) {
+                  final index = entry.key;
+                  final project = entry.value;
+
+                  return Column(
+                    children: [
+                      ExperienceItem(projects: project),
+                      if (index != projects.length - 1)
+                        SizedBox(height: size.height * 0.05),
+                    ],
+                  );
+                }),
               ],
             ),
           ),
@@ -129,7 +148,7 @@ class _ExperienceItemState extends State<ExperienceItem> {
               const SizedBox(height: 10),
               Container(
                 width: 3,
-                height: 180,
+                height: 120,
                 color: Colors.white,
               ),
             ],
@@ -169,10 +188,7 @@ class _ExperienceItemState extends State<ExperienceItem> {
                 ReadMoreText(
                   widget.projects["description"],
                   trimMode: TrimMode.Line,
-                  trimLines:
-                      size.width < 500 && widget.projects["year"] == "2023"
-                          ? 5
-                          : 4,
+                  trimLines:2,
                   textAlign: TextAlign.justify,
                   colorClickableText: primaryColor,
                   trimCollapsedText: ' Show more',
