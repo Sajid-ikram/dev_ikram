@@ -20,7 +20,7 @@ class InitialPage extends StatefulWidget {
 
 class _InitialPageState extends State<InitialPage> {
   // State variables for hover effects
-  Map<IconData, Color> hoverColors = {
+  Map<FaIconData, Color> hoverColors = {
     FontAwesomeIcons.linkedin: Colors.white.withOpacity(0.7),
     FontAwesomeIcons.github: Colors.white.withOpacity(0.7),
     FontAwesomeIcons.stackOverflow: Colors.white.withOpacity(0.7),
@@ -35,7 +35,7 @@ class _InitialPageState extends State<InitialPage> {
     }
   }
 
-  Widget _buildSocialMediaIcon(IconData icon, String url) {
+  Widget _buildSocialMediaIcon(FaIconData icon, String url) {
     return MouseRegion(
       onEnter: (_) {
         setState(() {
@@ -49,7 +49,7 @@ class _InitialPageState extends State<InitialPage> {
       },
       child: GestureDetector(
         onTap: () => _launchUrl(url),
-        child: Icon(
+        child: FaIcon(
           icon,
           color: hoverColors[icon], // Use the current hover color
           size: 30,

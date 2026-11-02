@@ -14,7 +14,7 @@ class ContactMe extends StatefulWidget {
 }
 
 class _ContactMeState extends State<ContactMe> {
-  Map<IconData, Color> hoverColors = {
+  Map<FaIconData, Color> hoverColors = {
     FontAwesomeIcons.linkedin: Colors.white.withOpacity(0.7),
     FontAwesomeIcons.github: Colors.white.withOpacity(0.7),
     FontAwesomeIcons.stackOverflow: Colors.white.withOpacity(0.7),
@@ -85,7 +85,7 @@ class _ContactMeState extends State<ContactMe> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  buildContactInfo(Icons.email, "sajidmdikram.com"),
+                  buildContactInfo(Icons.email, "sajidmdikram@gmail.com"),
                   SizedBox(width: 10),
                   buildContactInfo(Icons.phone, "+44 7541 903239"),
                 ],
@@ -97,7 +97,7 @@ class _ContactMeState extends State<ContactMe> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      buildContactInfo(Icons.email, "sajidmdikram.com"),
+                      buildContactInfo(Icons.email, "sajidmdikram@gmail.com"),
                       SizedBox(width: 10),
                       buildContactInfo(Icons.phone, "+44 7541 903239"),
                     ],
@@ -168,7 +168,7 @@ class _ContactMeState extends State<ContactMe> {
     }
   }
 
-  Widget _buildSocialMediaIcon(IconData icon, String url) {
+  Widget _buildSocialMediaIcon(FaIconData icon, String url) {
     return MouseRegion(
       onEnter: (_) {
         setState(() {
@@ -182,7 +182,7 @@ class _ContactMeState extends State<ContactMe> {
       },
       child: GestureDetector(
         onTap: () => _launchUrl(url),
-        child: Icon(
+        child: FaIcon(
           icon,
           color: hoverColors[icon], // Use the current hover color
           size: 30,
@@ -210,9 +210,9 @@ class _ContactMeState extends State<ContactMe> {
             onExit: (_) => setState(() => isHovered = false),
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 200),
-              width: 250,
+              width: 270,
               margin: const EdgeInsets.all(10),
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
               decoration: BoxDecoration(
                 color: isHovered ? secondaryColor : const Color(0xff3D3E42),
                 borderRadius: BorderRadius.circular(8),

@@ -1,4 +1,4 @@
-import 'package:dev_icons/dev_icons.dart';
+import 'package:dev_ikram/utils/dev_icons.dart';
 import 'package:dev_ikram/utils/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

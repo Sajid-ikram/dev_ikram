@@ -1,4 +1,3 @@
-import 'package:dev_icons/dev_icons.dart';
 import 'package:dev_ikram/utils/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +10,7 @@ import '../utils/colors.dart';
 class Experiences extends StatelessWidget {
   final List<Map<String, dynamic>> projects = [
     {
-      'title': 'Junior Mobile App Developer',
+      'title': 'Mobile App Developer',
       'year': '2025',
       'office': 'Perinatal Institute, Birmingham, UK',
       'description':

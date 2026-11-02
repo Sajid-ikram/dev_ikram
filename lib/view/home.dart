@@ -59,7 +59,7 @@ class CustomNevBar extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(width: size.width * 0.05),
-          const Icon(FontAwesomeIcons.house),
+          const FaIcon(FontAwesomeIcons.house),
           Spacer(),
           if(size.width > 450) GestureDetector(
             onTap: () => scrollToSection(size.height),
@@ -92,7 +92,7 @@ class CustomNevBar extends StatelessWidget {
             child: HoverText(text: "Experience"),
           ),
           const Spacer(),
-          const Icon(FontAwesomeIcons.magnifyingGlass),
+          const FaIcon(FontAwesomeIcons.magnifyingGlass),
           SizedBox(width: size.width * 0.05),
         ],
       ),
